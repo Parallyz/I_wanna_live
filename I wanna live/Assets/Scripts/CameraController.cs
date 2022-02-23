@@ -25,12 +25,9 @@ public class CameraController : MonoBehaviour
         {
             int curentX = Mathf.RoundToInt(player.position.x);
 
-
             lastX = Mathf.RoundToInt(player.position.x);
 
-            Vector3 target = transform.position = new Vector3(player.position.x + offset.x, player.position.y, transform.position.z);
-
-
+            Vector3 target = transform.position = new Vector3(player.position.x + 2 * offset.x, player.position.y + offset.y, transform.position.z);
 
             Vector3 currentPos = Vector3.Lerp(transform.position, target, dumping * Time.deltaTime);
             transform.position = currentPos;
@@ -44,7 +41,7 @@ public class CameraController : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
         lastX = Mathf.RoundToInt(player.position.x);
 
-        transform.position = new Vector3(player.position.x + offset.x, transform.position.y, transform.position.z);
+        transform.position = new Vector3(player.position.x - offset.x, transform.position.y, transform.position.z);
 
     }
 }

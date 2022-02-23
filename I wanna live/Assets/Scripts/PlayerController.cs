@@ -5,9 +5,11 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     // Start is called before the first frame update
-    public float speed = 0.000001f;
+    private float speed = 7;
     private bool isGrounded;
-    public int jumpPower = 5;
+
+   
+    private int jumpPower = 20;
 
     public float checkRadius;
     public Transform groundCheck;
@@ -15,6 +17,8 @@ public class PlayerController : MonoBehaviour
     public LayerMask theGround;
 
     private Rigidbody2D rb;
+
+ 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -23,8 +27,9 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, theGround);
-        var xPos = rb.velocity.x + speed;
-        rb.velocity = new Vector2(xPos, rb.velocity.y);
+      //  var Posx = rb.velocity.x + speed;
+       // print(Time.fixedDeltaTime);
+        rb.velocity = new Vector2(speed, rb.velocity.y);
     }
     // Update is called once per frame
     void Update()

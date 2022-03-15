@@ -6,15 +6,16 @@ public class HunterController : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    private float speed;
+    private float speed = 0;
     private Animator animator;
-
-    private int jumpPower;
-
+    private bool isGrounded;
+    private int jumpPower = 0;
+    public Transform groundCheck;
     private Rigidbody2D rb;
 
     private new CapsuleCollider2D collider2D;
-
+    public float checkRadius;
+    public LayerMask theGround;
     void Start()
     {
 
@@ -22,56 +23,60 @@ public class HunterController : MonoBehaviour
         animator = GetComponent<Animator>();
         collider2D = GetComponent<CapsuleCollider2D>();
 
-        GameManager.instanse.hunter_respown = this.transform.position;
-        speed = GameManager.instanse.hunter_current_speed;
-        GameManager.instanse.hunter_width = collider2D.size.x;
 
-        jumpPower = GameManager.instanse.jumpPower;
     }
     private void FixedUpdate()
     {
-        rb.velocity = new Vector2(speed, rb.velocity.y);
-        CheckTouch();
-        if (isTimeToJump())
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, theGround);
+        if (GameController.instanse.isRun)
+            rb.velocity = new Vector2(speed, rb.velocity.y);
+
+       
+    }
+
+
+
+
+    void Update()
+    {
+        Init();
+         if (GameController.instanse.isTimeToJump() && isGrounded)
         {
             Jump();
         }
     }
 
-    private bool isTimeToJump()
+    private void Init()
     {
-        if (GameManager.instanse.player_jump_position != null)
+        if (speed == 0 || jumpPower == 0)
         {
-            return GameManager.instanse.isPlayerJump &&
-                    GameManager.instanse.player_jump_position.x ==
-                    GameManager.instanse.hunter.transform.position.x;
+            speed = GameController.instanse.hunter_current_speed;
+            jumpPower = GameController.instanse.jumpPower;
+
+            GameController.instanse.SetHunterRespownPosition();
         }
-        return false;
     }
-
-    private void CheckTouch()
-    {
-        var isTouch = this.transform.position.x - GameManager.instanse.hunter_width;
-
-    }
-    void Update()
-    {
-
-    }
-
+   
     void Jump()
     {
         rb.AddForce(transform.up * jumpPower, ForceMode2D.Impulse);
-
+        GameController.instanse.isPlayerJump = false;
     }
-    private void OnTriggerEnter2D(Collider2D other)
+
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.CompareTag("Player"))
+
+        if (other.gameObject.CompareTag("Player"))
         {
+            GameController.instanse.StopMoving();
+
+
             animator.SetBool("isSlash", true);
-            speed = 0;
+
             animator.SetBool("isIdle", true);
 
         }
     }
+
+
 }

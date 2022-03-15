@@ -44,7 +44,7 @@ public class LevelController : MonoBehaviour
     public void LevelSuccess()
     {
         Time.timeScale = 0;
-        starResultImg.sprite = GameManager.instanse.TwoStarSprite;
+        starResultImg.sprite = GameController.instanse.TwoStarSprite;
         levelSuccessCanvas.SetActive(true);
 
     }

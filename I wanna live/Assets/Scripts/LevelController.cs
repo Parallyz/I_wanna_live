@@ -55,6 +55,11 @@ public class LevelController : MonoBehaviour
         levelFallCanvas.SetActive(true);
 
     }
+     public void LevelFallWithoutPause()
+    {     
+        levelFallCanvas.SetActive(true);
+
+    }
     public void RestartLevelGame()
     {
         Time.timeScale = 1;

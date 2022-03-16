@@ -6,10 +6,11 @@ public class HunterController : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    private float speed = 0;
+    public float speed;
+
     private Animator animator;
     private bool isGrounded;
-    private int jumpPower = 0;
+    public int jumpPower;
     public Transform groundCheck;
     private Rigidbody2D rb;
 
@@ -27,11 +28,13 @@ public class HunterController : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        animator.SetFloat("speed",speed);
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, theGround);
         if (GameController.instanse.isRun)
             rb.velocity = new Vector2(speed, rb.velocity.y);
+        
+        animator.SetBool("isJump", !isGrounded);
 
-       
     }
 
 
@@ -40,8 +43,9 @@ public class HunterController : MonoBehaviour
     void Update()
     {
         Init();
-         if (GameController.instanse.isTimeToJump() && isGrounded)
+        if (GameController.instanse.isTimeToJump() && isGrounded )
         {
+            animator.SetBool("isJump", true);
             Jump();
         }
     }
@@ -50,13 +54,11 @@ public class HunterController : MonoBehaviour
     {
         if (speed == 0 || jumpPower == 0)
         {
-            speed = GameController.instanse.hunter_current_speed;
-            jumpPower = GameController.instanse.jumpPower;
 
             GameController.instanse.SetHunterRespownPosition();
         }
     }
-   
+
     void Jump()
     {
         rb.AddForce(transform.up * jumpPower, ForceMode2D.Impulse);
@@ -69,11 +71,8 @@ public class HunterController : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             GameController.instanse.StopMoving();
-
-
             animator.SetBool("isSlash", true);
-
-            animator.SetBool("isIdle", true);
+            
 
         }
     }

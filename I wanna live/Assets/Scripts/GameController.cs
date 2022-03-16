@@ -18,12 +18,9 @@ public class GameController : MonoBehaviour
     [SerializeField]
     public Sprite ThreeStarSprite;
 
-    [SerializeField]
-    public int jumpPower;
-    public float player_min_speed { get; set; }
-    public float player_current_speed;
-    public float player_max_speed;
-    public float hunter_current_speed;
+   
+    
+    
 
 
     [HideInInspector]
@@ -54,7 +51,6 @@ public class GameController : MonoBehaviour
         if (!instanse)
         {
             instanse = this;
-
         }
     }
     public void StopMoving()
@@ -83,11 +79,7 @@ public class GameController : MonoBehaviour
         isPlayerJump = isjump;
 
     }
-    public void SetPlayerCurrentSpeed(float speed)
-    {
-        player_current_speed = speed;
-
-    }
+  
     public void SetPlayerRespownPosition()
     {
         player_respown = player.transform.position;

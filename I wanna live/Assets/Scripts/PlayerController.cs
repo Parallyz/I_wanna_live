@@ -6,11 +6,14 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     // Start is called before the first frame update
-    private float speed = 0;
+    public float speed;
+
+    public float min_speed;
+    public float max_speed;
     private bool isGrounded;
 
     private Animator animator;
-    private int jumpPower = 0;
+    public int jumpPower;
 
     public float checkRadius;
 
@@ -20,18 +23,19 @@ public class PlayerController : MonoBehaviour
     public LayerMask theGround;
 
     private Rigidbody2D rb;
-
+    private bool isAlive =true;
 
     [SerializeField]
     private GameObject fallDetect;
     private new CapsuleCollider2D collider2D;
 
+    private SpriteRenderer sprite;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         collider2D = GetComponent<CapsuleCollider2D>();
-
+        sprite= GetComponent<SpriteRenderer>();
 
 
     }
@@ -48,11 +52,11 @@ public class PlayerController : MonoBehaviour
             rb.velocity = new Vector2(speed, rb.velocity.y);
 
         }
-        if (speed < GameController.instanse.player_max_speed)
+        if (speed < max_speed)
         {
             speed += 0.05f;
         }
-        GameController.instanse.SetPlayerCurrentSpeed(speed);
+
     }
 
 
@@ -60,7 +64,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded && isAlive)
         {
             // print("ad");
             animator.SetBool("isJump", true);
@@ -72,12 +76,10 @@ public class PlayerController : MonoBehaviour
 
     private void Init()
     {
-        if (speed == 0 || jumpPower == 0)
-        {
-            GameController.instanse.SetHunterRespownPosition();
-            speed = GameController.instanse.player_current_speed;
-            jumpPower = GameController.instanse.jumpPower;
-        }
+
+        GameController.instanse.SetHunterRespownPosition();
+
+
     }
 
     void Jump()
@@ -85,7 +87,7 @@ public class PlayerController : MonoBehaviour
         GameController.instanse.SetPlayerJumpPosition();
         rb.AddForce(transform.up * jumpPower, ForceMode2D.Impulse);
 
-        //  speed = GameController.instanse.player_min_speed;
+        speed = min_speed;
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -105,16 +107,25 @@ public class PlayerController : MonoBehaviour
         }
         if (other.gameObject.CompareTag("Hunter"))
         {
+            isAlive=false;
             animator.SetBool("isDying", true);
             speed = 0;
+            Invoke("killHero", 2);
 
         }
     }
 
-
+   
 
     private void gameOver()
     {
         LevelController.instanse.LevelFall();
     }
+    private void killHero()
+    {
+       
+        
+        LevelController.instanse.LevelFallWithoutPause();
+    }
+
 }

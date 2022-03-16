@@ -5185,6 +5185,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f485086a8eb62204f9bf91b803ec6f01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 8
+  jumpPower: 20
   groundCheck: {fileID: 1012239660}
   checkRadius: 0.5
   theGround:
@@ -5309,8 +5311,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.2414887}
-  m_Size: {x: 1.0130191, y: 1.4770226}
+  m_Offset: {x: -0.05, y: -0.03}
+  m_Size: {x: 1.94, y: 1.82}
   m_Direction: 0
 --- !u!1001 &1456954508
 PrefabInstance:
@@ -7612,10 +7614,6 @@ MonoBehaviour:
   OneStarSprite: {fileID: 21300008, guid: f11b547750a4b1a4794915bbcbdfe633, type: 3}
   TwoStarSprite: {fileID: 21300010, guid: f11b547750a4b1a4794915bbcbdfe633, type: 3}
   ThreeStarSprite: {fileID: 21300012, guid: f11b547750a4b1a4794915bbcbdfe633, type: 3}
-  jumpPower: 20
-  player_current_speed: 5
-  player_max_speed: 6
-  hunter_current_speed: 6
   isPlayerJump: 0
   isRun: 1
   player: {fileID: 1386194384}
@@ -7944,11 +7942,39 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6981423552291245083, guid: 203270bd7713cce49b706ca444f95849, type: 3}
       propertyPath: m_Size.x
-      value: 0.87
+      value: 1.18
+      objectReference: {fileID: 0}
+    - target: {fileID: 6981423552291245083, guid: 203270bd7713cce49b706ca444f95849, type: 3}
+      propertyPath: m_Size.y
+      value: 2.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6981423552291245083, guid: 203270bd7713cce49b706ca444f95849, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 6981423552291245083, guid: 203270bd7713cce49b706ca444f95849, type: 3}
+      propertyPath: m_Direction
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6981423552291245083, guid: 203270bd7713cce49b706ca444f95849, type: 3}
       propertyPath: m_IsTrigger
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6981423552291245084, guid: 203270bd7713cce49b706ca444f95849, type: 3}
+      propertyPath: speed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6981423552291245084, guid: 203270bd7713cce49b706ca444f95849, type: 3}
+      propertyPath: jumpPower
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6981423552291245084, guid: 203270bd7713cce49b706ca444f95849, type: 3}
+      propertyPath: max_speed
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6981423552291245084, guid: 203270bd7713cce49b706ca444f95849, type: 3}
+      propertyPath: min_speed
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6981423552291245084, guid: 203270bd7713cce49b706ca444f95849, type: 3}
       propertyPath: fallDetect
@@ -7964,7 +7990,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6981423552291245085, guid: 203270bd7713cce49b706ca444f95849, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.87
+      value: -1.85
       objectReference: {fileID: 0}
     - target: {fileID: 6981423552291245085, guid: 203270bd7713cce49b706ca444f95849, type: 3}
       propertyPath: m_LocalPosition.z

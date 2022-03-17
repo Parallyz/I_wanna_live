@@ -39,12 +39,12 @@ public class PlayerController : MonoBehaviour
 
 
     }
-    
+
     private void FixedUpdate()
     {
         animator.SetFloat("speed", speed);
 
-       
+
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, theGround);
         animator.SetBool("isJump", !isGrounded);
 
@@ -65,25 +65,27 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded && isAlive)
-        {
-            // print("ad");
-            animator.SetBool("isJump", true);
+        if (Input.GetKeyDown(KeyCode.Space))
             Jump();
-        }
+
         fallDetect.transform.position = new Vector2(transform.position.x, fallDetect.transform.position.y);
 
     }
 
-    
 
-    void Jump()
+
+    public void Jump()
     {
-        GameController.instanse.SetPlayerJumpPosition();
-        rb.AddForce(transform.up * jumpPower, ForceMode2D.Impulse);
+        if (isGrounded && isAlive)
+        {
+            // print("ad");
+            animator.SetBool("isJump", true);
+            GameController.instanse.SetPlayerJumpPosition();
+            rb.AddForce(transform.up * jumpPower, ForceMode2D.Impulse);
 
-        speed = min_speed;
+            speed = min_speed;
+        }
+
     }
     private void OnTriggerEnter2D(Collider2D other)
     {

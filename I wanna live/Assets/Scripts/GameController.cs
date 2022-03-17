@@ -78,6 +78,6 @@ public class GameController : MonoBehaviour
         isPlayerJump = isjump;
 
     }
-  
+ 
    
 }

@@ -15,7 +15,7 @@ public class LevelController : MonoBehaviour
     public GameObject levelSuccessCanvas;
 
     public Image starResultImg;
-
+    
 
 
     private void Start()
@@ -24,6 +24,12 @@ public class LevelController : MonoBehaviour
         {
             instanse = this;
         }
+
+    }
+    public void LoadMainMenu()
+    {
+        SceneManager.LoadScene(0);
+        Time.timeScale = 1;
 
     }
     public void ResumeGame()

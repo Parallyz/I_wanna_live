@@ -73,7 +73,7 @@ public class PlayerController : MonoBehaviour
     }
 
 
-
+   
     public void Jump()
     {
         if (isGrounded && isAlive)

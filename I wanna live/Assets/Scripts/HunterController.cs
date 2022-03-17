@@ -51,6 +51,7 @@ public class HunterController : MonoBehaviour
             Jump();
         }
     }
+  
     public bool isTimeToJump()
     {
         if (GameController.instanse.player_jump_position != null)

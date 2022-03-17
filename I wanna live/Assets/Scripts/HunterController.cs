@@ -26,13 +26,15 @@ public class HunterController : MonoBehaviour
 
 
     }
+   
     private void FixedUpdate()
     {
-        animator.SetFloat("speed",speed);
+        animator.SetFloat("speed", speed);
+       
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, theGround);
         if (GameController.instanse.isRun)
             rb.velocity = new Vector2(speed, rb.velocity.y);
-        
+
         animator.SetBool("isJump", !isGrounded);
 
     }
@@ -42,22 +44,27 @@ public class HunterController : MonoBehaviour
 
     void Update()
     {
-        Init();
-        if (GameController.instanse.isTimeToJump() && isGrounded )
+
+        if (isTimeToJump() && isGrounded)
         {
             animator.SetBool("isJump", true);
             Jump();
         }
     }
-
-    private void Init()
+    public bool isTimeToJump()
     {
-        if (speed == 0 || jumpPower == 0)
+        if (GameController.instanse.player_jump_position != null)
         {
-
-            GameController.instanse.SetHunterRespownPosition();
+            return GameController.instanse.isPlayerJump &&
+                   GameController.instanse.player_jump_position.x >=
+                   GameController.instanse.hunter.transform.position.x - 0.5 &&
+                   GameController.instanse.player_jump_position.x <=
+                   GameController.instanse.hunter.transform.position.x + 0.5;
+            ;
         }
+        return false;
     }
+   
 
     void Jump()
     {
@@ -72,7 +79,8 @@ public class HunterController : MonoBehaviour
         {
             GameController.instanse.StopMoving();
             animator.SetBool("isSlash", true);
-            
+            speed = 0;
+
 
         }
     }

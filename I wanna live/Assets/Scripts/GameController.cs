@@ -40,10 +40,7 @@ public class GameController : MonoBehaviour
     public Vector2 player_respown;
     [HideInInspector]
     public Vector2 hunter_respown;
-    void Awake()
-    {
-        DontDestroyOnLoad(this);
-    }
+  
 
     private void Start()
     {
@@ -51,6 +48,8 @@ public class GameController : MonoBehaviour
         if (!instanse)
         {
             instanse = this;
+            player_respown= player.transform.position;
+            hunter_respown= hunter.transform.position;
         }
     }
     public void StopMoving()
@@ -80,24 +79,5 @@ public class GameController : MonoBehaviour
 
     }
   
-    public void SetPlayerRespownPosition()
-    {
-        player_respown = player.transform.position;
-    }
-    public bool isTimeToJump()
-    {
-        if (player_jump_position != null)
-        {
-            return isPlayerJump &&
-                   player_jump_position.x >= hunter.transform.position.x - 0.5 &&
-                   player_jump_position.x <= hunter.transform.position.x + 0.5;
-            ;
-        }
-        return false;
-    }
-    public void SetHunterRespownPosition()
-    {
-
-        hunter_respown = hunter.transform.position;
-    }
+   
 }

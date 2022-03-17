@@ -7954,7 +7954,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6981423552291245083, guid: 203270bd7713cce49b706ca444f95849, type: 3}
       propertyPath: m_Direction
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6981423552291245083, guid: 203270bd7713cce49b706ca444f95849, type: 3}
       propertyPath: m_IsTrigger

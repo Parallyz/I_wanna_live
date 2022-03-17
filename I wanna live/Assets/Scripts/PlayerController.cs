@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
     public LayerMask theGround;
 
     private Rigidbody2D rb;
-    private bool isAlive =true;
+    private bool isAlive = true;
 
     [SerializeField]
     private GameObject fallDetect;
@@ -35,14 +35,16 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         collider2D = GetComponent<CapsuleCollider2D>();
-        sprite= GetComponent<SpriteRenderer>();
+        sprite = GetComponent<SpriteRenderer>();
 
 
     }
-
+    
     private void FixedUpdate()
     {
-        Init();
+        animator.SetFloat("speed", speed);
+
+       
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, theGround);
         animator.SetBool("isJump", !isGrounded);
 
@@ -52,7 +54,7 @@ public class PlayerController : MonoBehaviour
             rb.velocity = new Vector2(speed, rb.velocity.y);
 
         }
-        if (speed < max_speed)
+        if (speed < max_speed && GameController.instanse.isRun)
         {
             speed += 0.05f;
         }
@@ -74,13 +76,7 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    private void Init()
-    {
-
-        GameController.instanse.SetHunterRespownPosition();
-
-
-    }
+    
 
     void Jump()
     {
@@ -107,15 +103,15 @@ public class PlayerController : MonoBehaviour
         }
         if (other.gameObject.CompareTag("Hunter"))
         {
-            isAlive=false;
-            animator.SetBool("isDying", true);
+            isAlive = false;
             speed = 0;
+            animator.SetBool("isDying", true);
             Invoke("killHero", 2);
 
         }
     }
 
-   
+
 
     private void gameOver()
     {
@@ -123,8 +119,8 @@ public class PlayerController : MonoBehaviour
     }
     private void killHero()
     {
-       
-        
+
+
         LevelController.instanse.LevelFallWithoutPause();
     }
 

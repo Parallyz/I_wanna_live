@@ -109,7 +109,6 @@ public class PlayerController : MonoBehaviour
             speed = 0;
             animator.SetBool("isDying", true);
             Invoke("killHero", 2);
-
         }
 
     }

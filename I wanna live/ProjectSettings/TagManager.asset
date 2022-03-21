@@ -6,6 +6,7 @@ TagManager:
   tags:
   - FallDetector
   - Hunter
+  - HunterStop
   layers:
   - Default
   - TransparentFX

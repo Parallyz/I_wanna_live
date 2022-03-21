@@ -50,7 +50,7 @@ public class LevelController : MonoBehaviour
     public void LevelSuccess()
     {
         Time.timeScale = 0;
-        starResultImg.sprite = GameController.instanse.TwoStarSprite;
+        starResultImg.sprite = GameController.instanse.ThreeStarSprite;
         levelSuccessCanvas.SetActive(true);
 
     }

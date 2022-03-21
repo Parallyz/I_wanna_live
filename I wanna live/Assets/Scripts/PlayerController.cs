@@ -73,7 +73,7 @@ public class PlayerController : MonoBehaviour
     }
 
 
-   
+
     public void Jump()
     {
         if (isGrounded && isAlive)
@@ -89,12 +89,12 @@ public class PlayerController : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-
-        if (other.CompareTag("FallDetector"))
+        if (other.CompareTag("Finish"))
         {
-            gameOver();
-        }
+            print("ASD");
+            Invoke("levelEnd", 1);
 
+        }
     }
     private void OnCollisionEnter2D(Collision2D other)
     {
@@ -111,18 +111,20 @@ public class PlayerController : MonoBehaviour
             Invoke("killHero", 2);
 
         }
+
     }
 
 
-
+    private void levelEnd()
+    {
+        LevelController.instanse.LevelSuccess();
+    }
     private void gameOver()
     {
         LevelController.instanse.LevelFall();
     }
     private void killHero()
     {
-
-
         LevelController.instanse.LevelFallWithoutPause();
     }
 
